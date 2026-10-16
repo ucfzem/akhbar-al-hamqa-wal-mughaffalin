@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>أخبار الحمقى والمغفلين — ابن الجوزي</title>
+  <meta name="description" content="قراءة رقمية لكتاب «أخبار الحمقى والمغفلين» لابن الجوزي (ت 597 هـ): أربعة وعشرون باباً، فهرس تفاعلي، بحث فوري مع إبراز الكلمات وعدّها، وقراءة كاملة دون إنترنت.">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#1b4332">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <button id="menuBtn" class="iconbtn" aria-label="الفهرس" aria-expanded="false" title="الفهرس">☰</button>
+    <div class="brand">
+      <h1>أخبار الحمقى والمغفلين</h1>
+      <p class="byline">ابن الجوزي <span class="dot">•</span> ت 597 هـ</p>
+    </div>
+    <div class="tools">
+      <button id="fontDec" class="iconbtn small" aria-label="تصغير الخط" title="تصغير الخط">A−</button>
+      <button id="fontInc" class="iconbtn small" aria-label="تكبير الخط" title="تكبير الخط">A+</button>
+      <button id="themeBtn" class="iconbtn" aria-label="الوضع الليلي / النهاري" title="الوضع الليلي / النهاري">🌙</button>
+    </div>
+  </header>
+
+  <div class="searchbar">
+    <span class="s-icon" aria-hidden="true">🔍</span>
+    <input type="text" id="searchInput" placeholder="ابحث في الكتاب كله…" autocomplete="off" aria-label="بحث في الكتاب">
+    <button id="clearBtn" class="clear" hidden aria-label="مسح البحث" title="مسح">✕</button>
+    <span id="searchCount" class="count" aria-live="polite"></span>
+    <div class="hits" id="hitsNav">
+      <button id="prevHit" aria-label="الموضع السابق" title="السابق">▲</button>
+      <button id="nextHit" aria-label="الموضع التالي" title="التالي">▼</button>
+    </div>
+  </div>
+
+  <div id="scrim" class="scrim" hidden></div>
+
+  <aside id="sidebar" class="sidebar" aria-label="فهرس الكتاب">
+    <div class="side-head">
+      <div class="side-title">
+        <span>الفهرس</span>
+        <span id="chapterCount" class="pill"></span>
+      </div>
+      <input type="text" id="tocFilter" placeholder="صفِّ الأبواب بالاسم…" autocomplete="off" aria-label="تصفية الفهرس">
+    </div>
+    <nav id="tocList" class="toc-list"></nav>
+  </aside>
+
+  <main id="reader" class="reader">
+    <article id="chapter" class="chapter">
+      <div class="loading-state">جاري تحميل الكتاب…</div>
+    </article>
+    <nav class="pager" id="pager" hidden>
+      <button id="prevCh" class="page-btn">◀ السابق</button>
+      <span id="pageInfo" class="page-info"></span>
+      <button id="nextCh" class="page-btn">التالي ▶</button>
+    </nav>
+  </main>
+
+  <footer class="foot">
+    <p>كتاب <strong>أخبار الحمقى والمغفلين</strong> لأبي الفرج ابن الجوزي <span class="gold">✦</span> المصدر: المكتبة الشاملة <span class="gold">✦</span> يَعمل دون إنترنت بعد أول زيارة</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./app.js"></script>
+  <script data-root-sw="1">if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})}</script>
+</body>
+</html>
