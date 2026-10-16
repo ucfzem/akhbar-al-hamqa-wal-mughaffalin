@@ -61,13 +61,20 @@ function toast(msg) {
 /* ---------- تحميل البيانات ---------- */
 async function init() {
   try {
-    const res = await fetch('./data/chapters.json', { cache: 'no-cache' });
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 15000);
+    const res = await fetch('./data/chapters.json', { cache: 'no-cache', signal: ctrl.signal });
+    clearTimeout(timer);
     if (!res.ok) throw new Error('data');
     const data = await res.json();
     state.chapters = Array.isArray(data) ? data : (data.chapters || []);
     if (!state.chapters.length) throw new Error('empty');
   } catch (e) {
-    $('#chapter').innerHTML = '<div class="empty-state">تعذّر تحميل ملف <b>data/chapters.json</b>. تأكد من وجوده بجانب الصفحة.</div>';
+    $('#chapter').innerHTML = '<div class="empty-state">تعذّر تحميل ملف <b>data/chapters.json</b>.<br>'
+      + 'إن كنت تستعمل نسخة قديمة، حدِّث الصفحة (Ctrl+F5) أو انتظر تحديث التخزين المؤقت.<br><br>'
+      + '<button id="retryBtn" class="iconbtn" style="cursor:pointer">إعادة المحاولة</button></div>';
+    const rb = document.getElementById('retryBtn');
+    if (rb) rb.addEventListener('click', () => location.reload());
     return;
   }
   let start = 1;
